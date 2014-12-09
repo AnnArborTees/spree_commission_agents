@@ -1,0 +1,40 @@
+<div data-hook="admin_image_form_fields" class="row">
+  <div class="col-md-6">
+    <div data-hook="user" class="form-group">
+    <%= f.field_container :user_id do %>
+        <%= f.label :user_id, Spree.t(:commission_agent) %><br />
+        <%= f.collection_select :user_id, @users, :id, :email, {include_blank: true}, {:multiple => false, class: 'select2 fullwidth'} %>
+    <% end %>
+    </div>
+
+    <div data-hook="calculator_type" class="form-group">
+        <%= f.label :calculator_type, Spree.t(:calculator_type) %>
+        <%= f.select :calculator_type, ['percent', 'flat'], :class => 'form-control' %>
+    </div>
+
+    <div data-hook="rate" class="form-group">
+       <%= f.label :rate, Spree.t(:rate) %>
+        <%= f.text_field :rate, :class => 'form-control' %>
+        <p>
+          The percentage or fixed amount in commission
+        </p>
+    </div>
+
+  </div>
+  <div class="col-md-6">
+    <div data-hook="max" class="form-group">
+       <%= f.label :max, Spree.t(:maximum) %>
+        <%= f.text_field :max, :class => 'form-control' %>
+        <p>
+          A cap to the amount of commission for the item sold
+        </p>
+    </div>
+    <div data-hook="min" class="form-group">
+       <%= f.label :min, Spree.t(:minimum) %>
+        <%= f.text_field :min, :class => 'form-control' %>
+        <p>
+          A floor to the amount of commission for the item sold
+        </p>
+    </div>
+  </div>
+</div>

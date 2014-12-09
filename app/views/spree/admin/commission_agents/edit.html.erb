@@ -1,0 +1,15 @@
+<%= render :partial => 'spree/admin/shared/product_tabs', :locals => { :current => 'commission_agents' } %>
+
+<%= form_for [:admin, @product, @commission_agent], :html => { :multipart => true } do |f| %>
+  <fieldset data-hook="edit_commission_agent" class="row">
+    <div class="col-md-9">
+      <%= render :partial => 'form', :locals => { :f => f } %>
+    </div>
+
+    <div class="form-actions" data-hook="buttons">
+      <%= button Spree.t('actions.update'), 'save' %>
+      <span class="or"><%= Spree.t(:or) %></span>
+      <%= button_link_to Spree.t('actions.cancel'), admin_product_commission_agents_url(@product), :id => 'cancel_link', :icon => 'delete' %>
+    </div>
+  </fieldset>
+<% end %>
