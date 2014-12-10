@@ -3,7 +3,7 @@ module Spree
     has_many :commission_agents
 
     def comission_products
-      comission_agents.map(|ca| ca.product )
+      comission_agents.map{|ca| ca.product }
     end
 
     def comission_for_product(product, start_time, end_time)

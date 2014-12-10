@@ -35,7 +35,7 @@ describe Spree::Variant do
       it 'returns 0' do
         expect(product.master.total_commission).to eq(0)  
       end 
-    end
+
 
   end
 end

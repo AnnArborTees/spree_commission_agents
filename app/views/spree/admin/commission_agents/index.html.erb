@@ -7,6 +7,7 @@
 <% content_for :page_actions do %>
   <%= button_link_to Spree.t(:new_commission_agent), new_admin_product_commission_agent_path(@product), { class: "btn-success", icon: 'add', id: 'new_image_link' } %>
 <% end %>
+<div class="twelve columns">
 
 <% if @commission_agents.any? %>
   <table class="table" id="listing_comission_agents">
@@ -30,4 +31,8 @@
       <% end %>
     </tbody>
   </table>
+<% else %>
+  There are no agents for this product
 <% end %>
+
+</div>

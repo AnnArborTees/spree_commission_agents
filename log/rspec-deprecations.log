@@ -29,6 +29,7 @@ in RSpec 3. There are a few options for what you can use instead:
 
 (Called from /Users/Ricky/RailsApp/spree_commission_agents/spec/spec_helper.rb:72:in `block (2 levels) in <top (required)>')
 --------------------------------------------------------------------------------
+`mock_model` is deprecated. Use the `rspec-activemodel-mocks` gem instead. Called from /Users/Ricky/RailsApp/spree_commission_agents/spec/models/spree/order_spec.rb:16:in `block (2 levels) in <top (required)>'.
 
 If you need more of the backtrace for any of these deprecations to
 identify where to make the necessary changes, you can configure
