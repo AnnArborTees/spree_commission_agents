@@ -1,0 +1,47 @@
+<div class="container">
+  <h1 class="header">Comission Reports for <%= params[:start_time] %> through <%= params[:end_time] %></h1>
+
+  <table class="table table-striped">
+    <thead>
+        <th>
+          Product
+        </th>
+        <th>
+          Total Sold
+        </th>
+        <th>
+          Total Discounted
+        </th>
+        <th>
+          Subtotal
+        </th>
+        <th>
+          Total Commission
+        </th>
+    </thead>
+    <tbody>
+        <% @user.commission_agents.each do |ca| %>
+            <tr>
+              <td>
+                <%= ca.product.name %>
+              </td>
+              <td>
+                <% sales = ca.sales(params[:start_time], params[:end_time]) %>
+                   <%= number_to_currency sales %>
+              </td>
+              <td>
+                <% discounts = ca.discounts(params[:start_time], params[:end_time]) %>
+                <%= number_to_currency discounts %>
+              </td>
+              <td>
+                <%= number_to_currency sales + discounts %>
+              </td>
+              <td>
+                <%= number_to_currency ca.commissions_total(params[:start_time], params[:end_time]) %>
+              </td>
+            </tr>
+        <% end %>
+    </tbody>
+
+  </table>
+</div>

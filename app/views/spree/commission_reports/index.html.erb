@@ -1,0 +1,9 @@
+<div class="container">
+  <h1 class="header">Comission Reports</h1>
+
+  <ul>
+    <li><%= link_to 'This Month', "/commission/#{Time.now.strftime('%Y-%m-01')}...#{Time.now.utc.end_of_month.strftime('%Y-%m-%d')}" %></li>
+    <li><%= link_to 'Last Month', "/commission/#{(Time.now - 1.month).strftime('%Y-%m-01')}...#{(Time.now - 1.month).utc.end_of_month.strftime('%Y-%m-%d')}" %></li>
+  </ul>
+
+</div>
