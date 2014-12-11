@@ -1,7 +1,7 @@
 <%= render partial: 'spree/admin/shared/product_tabs', locals: { current: 'Commission Agents' } %>
 
 <% content_for :page_title do %>
-  <%= Spree.t(:comission_agents) %>
+  <%= Spree.t(:commission_agents) %>
 <% end %>
 
 <% content_for :page_actions do %>
@@ -10,12 +10,12 @@
 <div class="twelve columns">
 
 <% if @commission_agents.any? %>
-  <table class="table" id="listing_comission_agents">
+  <table class="table" id="listing_commission_agents">
     <thead>
-      <tr data-hook="admin_comission_agents_index_headers">
+      <tr data-hook="admin_commission_agents_index_headers">
         <th>User</th>
         <th>Amount</th>
-        <th data-hook="admin_comission_agents_index_header_actions" class="actions"></th>
+        <th data-hook="admin_commission_agents_index_header_actions" class="actions"></th>
       </tr>
     </thead>
     <tbody>
@@ -23,7 +23,7 @@
           <tr>
             <td><%= ca.user.email %></td>
             <td><%= display_rate ca %></td>
-            <td class="actions actions-3" data-hook="admin_comission_agents_index_row_actions">
+            <td class="actions actions-3" data-hook="admin_commission_agents_index_row_actions">
               <%= link_to_edit ca, :no_text => true, :class => 'edit' if can?(:edit, ca) %>
               <%= link_to_delete ca, :no_text => true if can?(:delete, ca) %>
             </td>

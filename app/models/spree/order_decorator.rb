@@ -2,7 +2,7 @@ module Spree
   Order.class_eval do
     after_touch :create_commissions, if: :completed_at?
 
-    def create_comissions
+    def create_commissions
       line_items.each{|li| li.assign_commissions }
     end
 

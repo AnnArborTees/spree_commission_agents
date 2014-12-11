@@ -8,7 +8,7 @@ module Spree
 
       def load_data
         @product = Spree::Product.friendly.find(params[:product_id])
-        @comission_agents = Spree::CommissionAgent.where(product_id: @product.id)
+        @commission_agents = Spree::CommissionAgent.where(product_id: @product.id)
         @users = Spree::Role.find_by(name: 'commission agent').users
       end
     end
