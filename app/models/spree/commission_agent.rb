@@ -12,15 +12,18 @@ module Spree
       return base_commission(variant, adjustment)
     end
 
-    def commissions_total(start_time = '2014-12-01', end_time = nil)
+    def commissions_total(start_time = '2014-12-01', end_time = '2020-12-01')
+      end_time = "#{end_time} 23:59:59"
       commissions.joins(:line_item).joins(line_item: :order).where("completed_at > ? AND completed_at < ? and completed_at is not null", start_time, end_time).sum(:amount)
     end
 
     def sales(start_time = '2014-12-01', end_time = nil)
+      end_time = "#{end_time} 23:59:59"
       product.variants.joins(:line_items).joins(line_items: :order).where("completed_at > ? AND completed_at < ? and completed_at is not null", start_time, end_time).sum(:price)
     end
 
     def discounts(start_time = '2014-12-01', end_time = nil)
+      end_time = "#{end_time} 23:59:59"
       product.variants.joins(:line_items).joins(line_items: :order).where("completed_at > ? AND completed_at < ? and completed_at is not null", start_time, end_time).sum('spree_line_items.adjustment_total')
     end
 
