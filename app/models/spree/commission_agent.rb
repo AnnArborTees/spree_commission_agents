@@ -2,7 +2,7 @@ module Spree
   class CommissionAgent < ActiveRecord::Base
   	belongs_to :user
   	belongs_to :product
-    has_many :commissions
+    has_many :commissions, dependent: :destroy
 
 
     def effective_rate(variant = nil, adjustment = 0)

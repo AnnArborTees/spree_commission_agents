@@ -1,5 +1,8 @@
 <div class="container">
   <h1 class="header">Comission Reports for <%= params[:start_time] %> through <%= params[:end_time] %></h1>
+  <%
+    sales_total, discounts_total, commissions_total = 0, 0 ,0
+  %>
 
   <table class="table table-striped">
     <thead>
@@ -27,21 +30,54 @@
               </td>
               <td>
                 <% sales = ca.sales(params[:start_time], params[:end_time]) %>
+                <% sales_total += sales %>
                    <%= number_to_currency sales %>
               </td>
               <td>
                 <% discounts = ca.discounts(params[:start_time], params[:end_time]) %>
+                <% discounts_total += discounts %>
                 <%= number_to_currency discounts %>
               </td>
               <td>
                 <%= number_to_currency sales + discounts %>
               </td>
               <td>
-                <%= number_to_currency ca.commissions_total(params[:start_time], params[:end_time]) %>
+                <% commissions = ca.commissions_total(params[:start_time], params[:end_time]) %>
+                <% commissions_total += commissions %>
+                <%= number_to_currency commissions %>
               </td>
             </tr>
         <% end %>
+        <tr>
+          <td>
+            TOTALS:
+          </td>
+          <td>
+            <%= number_to_currency sales_total %>
+          </td>
+          <td>
+            <%= number_to_currency discounts_total %>
+          </td>
+          <td>
+            <%= number_to_currency sales_total + discounts_total %>
+          </td>
+          <td>
+            <%= number_to_currency commissions_total %>
+          </td>
+        </tr>
     </tbody>
 
   </table>
+      <div class="col-xs-5 col-xs-offset-7 text-right">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Total Commission</h4>
+          </div>
+          <div class="panel-body">
+            <%= number_to_currency commissions_total %>
+          </div>
+        </div>
+      </div>
+
+  </div>
 </div>

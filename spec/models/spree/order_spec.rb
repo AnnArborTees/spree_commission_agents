@@ -16,16 +16,11 @@ describe Spree::Order do
     Spree::LegacyUser.stub(:current => mock_model(Spree::LegacyUser, :id => 123))
   end
 
-  context "#finalize!", pending: 'TODO: I either need to learn how to properly call the after_transition
-                                   or how to test it' do
+  context "#finalize!" do
     let(:order) { Spree::Order.create(email: 'test@example.com') }
 
-    before do
-      order.update_column :state, 'complete'
-    end
-
     it "sets creates commission for commission agent products" do
-
+      order.update_column :state, 'complete'
       order.should_receive(:create_commissions)
       order.finalize!
     end
