@@ -3,6 +3,14 @@ Spree::Core::Engine.routes.append do
     resources :products do
       resources :commission_agents
     end
+
+    resources :reports, :only => [:index] do
+      collection do
+        get :commission_total
+        post :commission_total
+      end
+    end
+
   end
 
   get 'commission' => 'commission_reports#index'

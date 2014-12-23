@@ -1,0 +1,28 @@
+<table class="admin-report" data-hook="sales_total">
+  <thead>
+  <tr>
+    <th><%= Spree.t(:product) %></th>
+    <th><%= Spree.t(:sales_total) %></th>
+    <th><%= Spree.t(:adjustment_total) %></th>
+    <th><%= Spree.t(:commission_total) %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @totals.each do |product, values| %>
+      <tr class="align-center">
+        <td><%= product %></td>
+        <td><%= number_to_currency values[:sales_total] %></td>
+        <td><%= number_to_currency values[:adjustment_total] %></td>
+        <td><%= number_to_currency values[:commission_total] %></td>
+      </tr>
+  <% end %>
+
+  <tr class="align-center">
+    <td>TOTAL:</td>
+    <td><%= number_to_currency @totals.values.sum{|x| x[:sales_total]} %></td>
+    <td><%= number_to_currency @totals.values.sum{|x| x[:adjustment_total]} %></td>
+    <td><%= number_to_currency @totals.values.sum{|x| x[:commission_total]} %></td>
+  </tr>
+
+  </tbody>
+</table>

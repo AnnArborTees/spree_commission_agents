@@ -1,0 +1,18 @@
+Report: Commission Total
+Start: <%= params[:completed_at_gt].strftime('%F %T') %>
+End: <%= params[:completed_at_lt].strftime('%F %T') %>
+<% if @agent.nil? -%>
+
+Agent,Item Total,Adjustment Total,Commission Total
+<% @totals.each do |agent, values| -%>
+<%= agent.email %>,<%= number_to_currency values[:sales_total] %>,<%= number_to_currency values[:adjustment_total] %>,<%= number_to_currency values[:commission_total] %>
+<% end -%>
+<% else %>
+Agent: <%= @agent.email %>
+
+Product,Sales Total,Adjustment Total,Commission Total
+<% @totals.each do |product, values| -%>
+<%= product %>,<%= number_to_currency values[:sales_total] %>,<%= number_to_currency values[:adjustment_total] %>,<%= number_to_currency values[:commission_total] %>
+<% end -%>
+<% end %>
+TOTALS:,<%= @totals.values.sum{|x| x[:sales_total]} %>,<%= @totals.values.sum{|x| x[:adjustment_total]} %>,<%= @totals.values.sum{|x| x[:commission_total]} %>
