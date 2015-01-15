@@ -8,7 +8,15 @@ module Spree
     end
 
     def show
+      respond_to do |format|
+        format.html { render }
+        format.csv { render layout: nil }
+      end
+    end
 
+    def create
+      redirect_to commission_report_path(start_time: params[:start_time],
+                                   end_time: params[:end_time])
     end
 
     private

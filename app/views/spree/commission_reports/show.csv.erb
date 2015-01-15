@@ -1,0 +1,21 @@
+  Commissions Report for <%= @user.email %>
+  Start Date: <%= params[:start_time] %>
+  End Date: <%= params[:end_time] %>
+
+  <%- 
+    sales_total, discounts_total, commissions_total = 0, 0 ,0
+  %>
+Product,Units Sold,Dollars Sold,Total Discounted,Subtotal,Total Commission
+<% @user.commission_agents.each do |ca| %>
+<%- 
+  sales = ca.sales(params[:start_time], params[:end_time])
+  sales_total += sales
+  discounts = ca.discounts(params[:start_time], params[:end_time])
+  discounts_total += discounts 
+  commissions = ca.commissions_total(params[:start_time], params[:end_time])
+  commissions_total += commissions 
+
+%>
+<%= ca.product.name %>,<%= ca.units_sold(params[:start_time], params[:end_time]) %>,<%= number_to_currency sales %>,<%= number_to_currency discounts %>,<%= number_to_currency sales + discounts %>,<%= number_to_currency commissions %>
+<%- end %>
+,,,,TOTAL:,<%= number_to_currency commissions_total %>

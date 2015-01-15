@@ -20,6 +20,14 @@ module Spree
           where("completed_at > ? AND completed_at < ? and completed_at is not null and state = 'complete'", start_time, end_time).sum(:amount)
     end
 
+    def units_sold(start_time = '2014-12-01', end_time = nil)
+      end_time = "#{end_time} 23:59:59"
+      commissions.
+          joins(:line_item).
+          joins(line_item: :order).
+          where("completed_at > ? AND completed_at < ? and completed_at is not null and state = 'complete'", start_time, end_time).sum(:quantity)
+    end
+
     def sales(start_time = '2014-12-01', end_time = nil)
       end_time = "#{end_time} 23:59:59"
       commissions.

@@ -1,9 +1,27 @@
 <div class="container">
   <h1 class="header">Commission Reports</h1>
 
+  <h2>Recent Months</h2>
   <ul>
     <li><%= link_to 'This Month', "/commission/#{Time.now.strftime('%Y-%m-01')}...#{Time.now.utc.end_of_month.strftime('%Y-%m-%d')}" %></li>
     <li><%= link_to 'Last Month', "/commission/#{(Time.now - 1.month).strftime('%Y-%m-01')}...#{(Time.now - 1.month).utc.end_of_month.strftime('%Y-%m-%d')}" %></li>
   </ul>
+
+  <h3>Custom Timeframe</h3>
+
+  <%= form_tag commission_reports_path, method: :post, id: 'sales_report_form' do %>
+    <!-- the following data-date-format are for use with datetimepicker-rails -->
+
+      <p class="field" id="commission_report_start_date">
+      <%= label_tag "Start Date" %><span class="required">*</span>
+      <%= text_field_tag :start_time, nil, 'data-date-format' => 'YYYY-MM-DD', placeholder: 'Start Time (Format YYYY-MM-DD)', class: 'form-control required' %>
+    </p>
+
+      <p class="field" id="commission_report_end_date">
+      <%= label_tag "End Date" %><span class="required">*</span>
+      <%= text_field_tag :end_time, nil, 'data-date-format' => 'YYYY-MM-DD', placeholder: 'End Time (Format YYYY-MM-DD)', class: 'form-control required'  %>
+    </p>
+      <%= button_tag 'Generate Report', class: 'btn btn-default' %>
+  <% end %>
 
 </div>
