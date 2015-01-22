@@ -15,7 +15,7 @@ module Spree
     end
 
     def create
-      redirect_to commission_report_path(start_time: params[:start_time],
+      redirect_to commission_agent_report_path(start_time: params[:start_time],
                                    end_time: params[:end_time])
     end
 
