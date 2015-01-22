@@ -15,7 +15,7 @@ Spree::Core::Engine.routes.append do
 
 
   resources :commission_reports, only: [:index, :create]
-  get 'commission/:start_time...:end_time' => 'commission_reports#show', as: :pretty_commission_report
+  get 'commission/:start_time...:end_time' => 'commission_reports#show'
   get 'commission' => 'commission_reports#index'
 
 end

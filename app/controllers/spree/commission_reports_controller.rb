@@ -15,8 +15,7 @@ module Spree
     end
 
     def create
-      redirect_to pretty_commission_report_path(start_time: params[:start_time],
-                                   end_time: params[:end_time])
+      redirect_to  "/commission/#{params[:start_time]}...#{params[:end_time]}"
     end
 
     private
