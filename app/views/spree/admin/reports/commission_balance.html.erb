@@ -1,0 +1,27 @@
+<% content_for :page_title do %>
+    <%= Spree.t(:commission_balance_report) %>
+<% end %>
+
+<% content_for :page_actions do %>
+    <li><%= link_to_with_icon 'arrow-left', Spree.t(:back_to_reports_list), spree.admin_reports_url, :class => 'button' %></li>
+<% end %>
+
+
+<% content_for :table_filter_title do %>
+    <%= Spree.t(:balance_as_of) %>
+<% end %>
+
+<% content_for :table_filter do %>
+    <%= form_tag spree.commission_balance_admin_reports_path, method: :get do  %>
+        <div class="date-range-filter field align-center">
+          <%= label_tag nil, Spree.t(:balance_as_of), :class => 'inline' %>
+          <%= text_field_tag :balance_as_of, datepicker_field_value(params[:balance_as_of]), class: 'datepicker' %>
+        </div>
+
+        <div class="actions filter-actions">
+          <%= button 'Run Report', 'search'  %>
+        </div>
+    <% end %>
+<% end %>
+
+<%= render 'all_agents_balance_table' %>

@@ -1,0 +1,29 @@
+<table class="admin-report" data-hook="sales_total">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Amount</th>
+    <th>Method</th>
+    <th>TX-ID</th>
+    <th>Bring Current At</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @totals.each do |key, cp| %>
+      <tr class="align-center">
+        <td><%= cp.created_at.strftime("%F") %></td>
+        <td><%= cp.bring_current_at %></td>
+        <td><%= cp.payment_method %></td>
+        <td><%= cp.transaction_id %></td>
+        <td><%= number_to_currency cp.amount %></td>
+      </tr>
+  <% end %>
+
+  <tr class="align-center">
+    <td colspan="3"></td>
+    <td>TOTAL:</td>
+    <td><%= number_to_currency @totals.values.sum{|x| x.amount } %></td>
+  </tr>
+
+  </tbody>
+</table>

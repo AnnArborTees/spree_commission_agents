@@ -16,6 +16,10 @@ Spree::Core::Engine.routes.append do
       collection do
         get :commission_total
         post :commission_total
+        get :commission_payment_total
+        post :commission_payment_total
+        get :commission_balance
+        post :commission_balance
       end
     end
 

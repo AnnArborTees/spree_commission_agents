@@ -1,0 +1,22 @@
+<table class="admin-report" data-hook="sales_total">
+  <thead>
+  <tr>
+    <th><%= Spree.t(:agent) %></th>
+    <th><%= Spree.t(:payment_total) %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @totals.each do |agent, values| %>
+      <tr class="align-center">
+        <td><%= link_to agent.email, "#" %></td>
+        <td><%= number_to_currency values[:payment_total] %></td>
+      </tr>
+  <% end %>
+
+  <tr class="align-center">
+    <td>TOTAL:</td>
+    <td><%= number_to_currency @totals.values.sum{|x| x[:payment_total]} %></td>
+  </tr>
+
+  </tbody>
+</table>
