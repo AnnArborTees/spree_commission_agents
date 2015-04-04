@@ -1,7 +1,45 @@
 <div class="container">
-  <h1 class="header">Commission Reports</h1>
+  <h1 class="header">Commission Information</h1>
+  <h2>Commission Balance</h2>
+  <dl>
+    <dt>
+      Current Balance:
+    </dt>
+    <dd>
+      <%= number_to_currency @user.commission_balance_as_of %>
+    </dd>
+  </dl>
+  <h2>Commission Payments</h2>
+  <% if @user.commission_payments.empty? %>
+      <p>There are currently no commission payments on record for your account</p>
+      <% else %>
+      <table class="table table-condensed" id="listing_users" data-hook>
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Method</th>
+          <th>TX-ID</th>
+          <th>Bring Current At</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @user.commission_payments.each do |cp|%>
+            <tr id="<%= spree_dom_id cp %>" data-hook="admin_user_commission_payments_index_rows" class="<%= cycle('odd', 'even')%>">
+              <td><%= cp.created_at.strftime('%F') %></td>
+              <td><%= number_to_currency cp.amount %></td>
+              <td><%= cp.payment_method %></td>
+              <td><%= cp.transaction_id %></td>
+              <td><%= cp.bring_current_at %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% end %>
 
-  <h2>Recent Months</h2>
+
+  <h2 class="header">Commission Reports</h1>
+  <h3>Recent Months</h3>
   <ul>
     <li><%= link_to 'This Month', "/commission/#{Time.now.strftime('%Y-%m-01')}...#{Time.now.utc.end_of_month.strftime('%Y-%m-%d')}" %></li>
     <li><%= link_to 'Last Month', "/commission/#{(Time.now - 1.month).strftime('%Y-%m-01')}...#{(Time.now - 1.month).utc.end_of_month.strftime('%Y-%m-%d')}" %></li>
