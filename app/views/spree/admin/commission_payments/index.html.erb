@@ -1,0 +1,58 @@
+<% content_for :page_title do %>
+    <%= link_to "#{Spree.t(:editing_user)} #{@user.email}", edit_admin_user_url(@user) %>
+<% end %>
+
+<%= render :partial => 'spree/admin/users/sidebar', :locals => { :current => :commission_payments } %>
+<%= render :partial => 'spree/admin/users/user_page_actions' %>
+
+<%= render 'form' %>
+
+<fieldset data-hook="admin_user_edit_general_settings" class="alpha twelve columns">
+  <legend><%= Spree.t(:"admin.user.commission_balance_as_of") %></legend>
+  <div data-hook="admin_user_form_fields" class="row">
+    <div class="alpha ten columns">
+        <%= form_tag commission_balance_admin_user_commission_payments_path(@user), method: :get, remote: true do |f| %>
+          <%= label_tag :balance_as_of %>
+          <%= text_field_tag :balance_as_of, datepicker_field_value(Time.now), :class => 'datepicker' %>
+          <%= submit_tag "Calculate" %>
+        <% end %>
+    </div>
+
+    <div class="two columns omega" id="balance-as-of">
+        <%= number_to_currency @user.commission_balance_as_of %>
+    </div>
+  </div>
+
+</fieldset>
+
+<fieldset data-hook="admin_user_edit_general_settings" class="alpha twelve columns">
+  <legend><%= Spree.t(:"admin.user.commission_payments") %></legend>
+  <table class="index" id="listing_users" data-hook>
+    <thead>
+    <tr data-hook="admin_users_index_headers">
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Method</th>
+      <th>TX-ID</th>
+      <th>Bring Current At</th>
+      <th data-hook="admin_users_index_header_actions" class="actions"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @user.commission_payments.each do |cp|%>
+        <tr id="<%= spree_dom_id cp %>" data-hook="admin_user_commission_payments_index_rows" class="<%= cycle('odd', 'even')%>">
+          <td><%= cp.created_at.strftime('%F') %></td>
+          <td><%= number_to_currency cp.amount %></td>
+          <td><%= cp.payment_method %></td>
+          <td><%= cp.transaction_id %></td>
+          <td><%= cp.bring_current_at %></td>
+          <td data-hook="admin_users_index_row_actions" class="actions">
+            <%= link_to_delete cp, :no_text => true %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+</fieldset>
+

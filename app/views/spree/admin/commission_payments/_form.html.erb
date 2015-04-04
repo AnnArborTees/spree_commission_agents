@@ -1,0 +1,40 @@
+<fieldset data-hook="admin_user_edit_general_settings" class="alpha twelve columns">
+  <legend><%= Spree.t(:"admin.user.new_commission_payment") %></legend>
+  <%= form_for [:admin, @user, @commission_payment] do |f| %>
+
+      <div data-hook="admin_user_form_fields" class="row">
+        <div class="alpha twelve columns omega">
+          <%= f.field_container :amount do %>
+              <%= f.label :amount, Spree.t(:amount) %>
+              <%= f.text_field :amount, value: number_to_currency(@commission_payment.amount, unit: ''), class: 'fullwidth' %>
+              <%= error_message_on :commission_payment, :amount %>
+          <% end %>
+
+          <%= f.field_container :payment_method do %>
+              <%= f.label :payment_method, Spree.t(:payment_method) %><br />
+              <%= f.select :payment_method, Spree::CommissionPayment::PAYMENT_METHODS, include_blank: true, :class => 'fullwidth' %>
+              <%= error_message_on :commission_payment, :payment_method %>
+          <% end %>
+
+          <%= f.field_container :transaction_id do %>
+              <%= f.label :transaction_id, Spree.t(:transaction_id) %>
+              <%= f.text_field :transaction_id, :class => 'fullwidth' %>
+              <%= error_message_on :commission_payment, :transaction_id %>
+          <% end %>
+
+          <%= f.field_container :bring_current_at do %>
+              <%= f.label :bring_current_at, Spree.t(:bring_current_at) %><br />
+              <%= f.error_message_on :bring_current_at %>
+              <%= f.text_field :bring_current_at, :value => datepicker_field_value(@commission_payment.bring_current_at), :class => 'datepicker' %>
+          <% end %>
+
+          <%= f.hidden_field :user_id, value: @user.id %>
+        </div>
+      </div>
+
+
+      <div data-hook="admin_user_edit_form_button">
+        <%= render :partial => 'spree/admin/shared/new_resource_links', :locals => { :collection_url => admin_user_commission_payments_url } %>
+      </div>
+  <% end %>
+</fieldset>

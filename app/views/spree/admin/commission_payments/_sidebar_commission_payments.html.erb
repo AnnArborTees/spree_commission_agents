@@ -1,0 +1,7 @@
+<fieldset data-hook="admin_user_lifetime_stats">
+  <legend><%= Spree.t(:commission_payment_history) %></legend>
+  <dl id="user-lifetime-stats">
+    <dt><%= Spree.t(:total_payment_amount) %>:</dt>
+    <dd><%= number_to_currency @user.commission_payments_total %></dd>
+  </dl>
+</fieldset>
