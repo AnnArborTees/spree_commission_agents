@@ -25,6 +25,16 @@
 
 </fieldset>
 
+<fieldset>
+  <legend><%= Spree.t(:"admin.user.recalculate") %></legend>
+
+  <%# TODO form for calculate-missing and recalculate %>
+  <%= form_tag recalculate_admin_user_commission_payments_path(@user), method: :post do |f| %>
+    <%= button_tag "Recalculate All Commission", class: 'button' %>
+    <%= button_tag "Recalculate Missing Commission", class: 'button', name: 'missing_only', value: 'true' %>
+  <% end %>
+</fieldset>
+
 <fieldset data-hook="admin_user_edit_general_settings" class="alpha twelve columns">
   <legend><%= Spree.t(:"admin.user.commission_payments") %></legend>
   <table class="index" id="listing_users" data-hook>

@@ -8,6 +8,7 @@ Spree::Core::Engine.routes.append do
       resources :commission_payments do
         collection do
           get :commission_balance
+          post :recalculate
         end
       end
     end
