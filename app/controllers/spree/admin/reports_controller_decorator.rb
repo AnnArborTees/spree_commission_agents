@@ -81,6 +81,25 @@ module Spree
         end
       end
 
+      def missing_commission_agents
+        @per_page = 60
+
+        @stores = Spree::Store.all
+        @page = (params[:page] || 0).to_i
+
+        if (store_id = params[:store_id]).present?
+          @store = @stores.find(store_id)
+        end
+
+        if @store
+          @products = @store.products
+        else
+          @products = Spree::Product.all
+        end
+
+        @products = @products.where("`spree_products`.id NOT IN (SELECT DISTINCT(`spree_commission_agents`.product_id) FROM spree_commission_agents)")
+        @products = @products.limit(@per_page).offset(@page * @per_page)
+      end
     end
   end
 end
