@@ -1,0 +1,57 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:commission_payments_report) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li><%= link_to_with_icon 'arrow-left', Spree.t(:back_to_reports_list), spree.admin_reports_url, :class => 'button' %></li>
+<% end %>
+
+<% content_for :table_filter do %>
+  <%= form_tag spree.missing_commission_agents_admin_reports_path, method: :get do  %>
+    <div class="field align-center">
+      <%= label_tag :store_id, 'Store' %>
+      <%= select_tag :store_id, options_from_collection_for_select(@stores, :id, :name, params[:store_id]), prompt: 'All', class: 'select2' %>
+    </div>
+
+    <div class="field align-center">
+      <%= label_tag :page %>
+      <% if @page >= 1 %>
+        <%= button_tag name: :page, value: @page - 1, class: 'button' do %>
+          <i class='fa fa-arrow-left'></i>
+        <% end %>
+      <% end %>
+      <%= @page + 1 %>
+      <% if @products.size >= @per_page %>
+        <%= button_tag name: :page, value: @page + 1, class: 'button' do %>
+          <i class='fa fa-arrow-right'></i>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="actions filter-actions">
+      <%= button 'Run Report', 'search'  %>
+    </div>
+  <% end %>
+
+  <div class='clearfix' style="margin-top: 5em;">
+    <h4>Products without commission agents in <% if @store %> <%= @store.name %> <% else %> all stores <% end %></h4>
+
+    <table class="admin-report" data-hook="sales_total">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= product.id %></td>
+            <td><%= link_to product.name, spree.edit_admin_product_path(product), target: :_blank %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

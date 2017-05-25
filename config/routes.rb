@@ -8,6 +8,7 @@ Spree::Core::Engine.routes.append do
       resources :commission_payments do
         collection do
           get :commission_balance
+          post :recalculate
         end
       end
     end
@@ -20,6 +21,8 @@ Spree::Core::Engine.routes.append do
         post :commission_payment_total
         get :commission_balance
         post :commission_balance
+        get :missing_commission_agents
+        post :missing_commission_agents
       end
     end
 
