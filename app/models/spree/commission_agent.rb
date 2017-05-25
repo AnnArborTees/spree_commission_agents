@@ -17,7 +17,7 @@ module Spree
       commissions.
           joins(:line_item).
           joins(line_item: :order).
-          where("completed_at > ? AND completed_at < ? and completed_at is not null and state = 'complete'", start_time, end_time).sum(:amount)
+          where("completed_at > ? AND completed_at < ? and completed_at < '2017-05-10 18:30:18' and completed_at is not null and state = 'complete'", start_time, end_time).sum(:amount)
     end
 
     def units_sold(start_time = '2014-12-01', end_time = nil)
@@ -25,7 +25,7 @@ module Spree
       commissions.
           joins(:line_item).
           joins(line_item: :order).
-          where("completed_at > ? AND completed_at < ? and completed_at is not null and state = 'complete'", start_time, end_time).sum(:quantity)
+          where("completed_at > ? AND completed_at < ? and completed_at < '2017-05-10 18:30:18' and completed_at is not null and state = 'complete'", start_time, end_time).sum(:quantity)
     end
 
     def sales(start_time = '2014-12-01', end_time = nil)
@@ -33,7 +33,7 @@ module Spree
       commissions.
           joins(:line_item).
           joins(line_item: :order).
-          where("completed_at > ? AND completed_at < ? and completed_at is not null and state = 'complete'", start_time, end_time).sum(:price)
+          where("completed_at > ? AND completed_at < ? and completed_at < '2017-05-10 18:30:18' and completed_at is not null and state = 'complete'", start_time, end_time).sum(:price)
     end
 
     def discounts(start_time = '2014-12-01', end_time = nil)
@@ -41,7 +41,7 @@ module Spree
       product.variants.
           joins(:line_items).
           joins(line_items: :order).
-          where("completed_at > ? AND completed_at < ? and completed_at is not null and state = 'complete'", start_time, end_time).sum('spree_line_items.adjustment_total')
+          where("completed_at > ? AND completed_at < ? and completed_at < '2017-05-10 18:30:18' and completed_at is not null and state = 'complete'", start_time, end_time).sum('spree_line_items.adjustment_total')
     end
 
     def line_items

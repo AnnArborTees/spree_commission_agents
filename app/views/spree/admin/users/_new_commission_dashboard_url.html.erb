@@ -1,0 +1,9 @@
+<div data-hook="admin_user_commission_url_fields" class="row">
+  <div class="alpha 12 columns">
+    <%= f.field_container :new_commission_dashboard_url do %>
+      <%= f.label :new_commission_dashboard_url, Spree.t(:new_commission_dashboard_url) %>
+      <%= f.text_field :new_commission_dashboard_url, :class => 'fullwidth' %>
+      <%= error_message_on :user, :new_commission_dashboard_url %>
+    <% end %>
+  </div>
+</div>

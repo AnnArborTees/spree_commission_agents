@@ -12,7 +12,7 @@ module Spree
       commission_agents.joins(:commissions).
           joins(commissions: :line_item).
           joins(commissions: {line_item: :order}).
-          where("completed_at > ? AND completed_at < ? and completed_at is not null and state = 'complete'", start_time, end_time).sum(:amount)
+          where("completed_at > ? AND completed_at < ? and completed_at < '2017-05-10 18:30:18' and completed_at is not null and state = 'complete'", start_time, end_time).sum(:amount)
     end
 
     def adjustments_total(start_time = '2014-10-01', end_time = '2030-10-01')
@@ -21,7 +21,7 @@ module Spree
           joins(product: :variants).
           joins(product: { variants: :line_items }).
           joins(product: { variants: {line_items: :order}}).
-          where("completed_at > ? AND completed_at < ? and completed_at is not null and state = 'complete'", start_time, end_time).sum('spree_line_items.adjustment_total')
+          where("completed_at > ? AND completed_at < ? and completed_at < '2017-05-10 18:30:18' and completed_at is not null and state = 'complete'", start_time, end_time).sum('spree_line_items.adjustment_total')
      end
 
     def sales_total(start_time = '2014-10-01', end_time = nil)
@@ -29,7 +29,7 @@ module Spree
       commission_agents.joins(:commissions).
           joins(commissions: :line_item).
           joins(commissions: {line_item: :order}).
-          where("completed_at > ? AND completed_at < ? and completed_at is not null and state = 'complete'", start_time, end_time).sum(:price)
+          where("completed_at > ? AND completed_at < ? and completed_at < '2017-05-10 18:30:18' and completed_at is not null and state = 'complete'", start_time, end_time).sum(:price)
     end
 
     def commission_products

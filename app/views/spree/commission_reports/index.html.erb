@@ -1,5 +1,21 @@
 <div class="container">
   <h1 class="header">Commission Information</h1>
+  <div class="alert alert-danger">
+    <p class='h3'>Commission reports have moved!</p>
+    <p>
+      Historical data will remain accessible here, however data will not report on sales after May 15th 2017, 6pm EST.
+    </p>
+
+    <% if @user.new_commission_dashboard_url.blank? %>
+      <p>
+      If you have not been notified, please contact your Ann Arbor Tees sales rep or reach out to support@annarbortees.com
+      </p>
+    <% else %>
+      <p>
+        Your new commission reporting dashboard is available at <%= link_to @user.new_commission_dashboard_url, @user.new_commission_dashboard_url %>
+      </p>
+    <% end %>
+  </div>
   <h2>Commission Balance</h2>
   <dl>
     <dt>

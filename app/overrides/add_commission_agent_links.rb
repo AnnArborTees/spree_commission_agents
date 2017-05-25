@@ -23,3 +23,10 @@ Deface::Override.new(virtual_path:  "spree/admin/users/_sidebar",
                      insert_after: "[data-hook='admin_user_lifetime_stats']",
                      partial: 'spree/admin/commission_payments/sidebar_commission_payments',
                      disabled: false)
+
+
+Deface::Override.new(virtual_path:  "spree/admin/users/_form",
+                     name:          "new_commission_url",
+                     insert_after: "[data-hook='admin_user_form_fields']",
+                     partial: 'spree/admin/users/new_commission_dashboard_url',
+                     disabled: false)
